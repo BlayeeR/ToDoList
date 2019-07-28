@@ -1,8 +1,15 @@
 ﻿<Application x:Class="ToDoApp.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:ToDoApp">
+             xmlns:local="clr-namespace:ToDoApp"
+             xmlns:edittask="clr-namespace:ToDoApp.EditTask"
+             xmlns:viewtasks="clr-namespace:ToDoApp.ViewTasks">
     <Application.Resources>
-         
+        <DataTemplate DataType="{x:Type edittask:EditTaskViewModel}">
+            <edittask:EditTaskView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewtasks:ViewTasksViewModel}">
+            <viewtasks:ViewTasksView />
+        </DataTemplate>
     </Application.Resources>
 </Application>

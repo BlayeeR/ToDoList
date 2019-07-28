@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ToDoApp.Controls
 {
-    public class CalendarModel : ICalendarModel, INotifyPropertyChanged
+    public class CalendarModel : ICalendarModel
     {
         private DateTime selectedDate;
 

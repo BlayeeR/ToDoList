@@ -12,8 +12,6 @@ namespace ToDoApp.Main
     {
         IMainModel MainModel { get; set; }
         IViewModel CurrentChildViewModel { get; set; }
-        IEditTaskViewModel EditTaskViewModel { get; set; }
-        IViewTasksViewModel ViewTasksViewModel { get; set; }
         IMainViewModel Get();
     }
 }

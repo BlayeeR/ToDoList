@@ -5,6 +5,21 @@
              xmlns:first="clr-namespace:ToDoApp.ViewTasks"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              d:DesignHeight="300"
-             d:DesignWidth="300"
+             d:DesignWidth="600"
              mc:Ignorable="d">
+    <Grid>
+        <ListView Name="TaskListBox" Margin="10,13" Grid.Column="1" SelectionMode="Single" HorizontalContentAlignment="Stretch">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Opis" Width="455"/>
+                    <GridViewColumn Width="100" Header="Wykonano"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
 </UserControl>

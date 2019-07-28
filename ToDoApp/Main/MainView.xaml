@@ -13,8 +13,9 @@
         </Grid.ColumnDefinitions>
         <Label Content="Wybierz datę" VerticalAlignment="Top" Margin="60,8,60,0" Height="26"/>
         <Calendar VerticalAlignment="Top" Margin="10,36,10,0" Height="168" SelectedDate="{Binding MainModel.Calendar.SelectedDate, UpdateSourceTrigger=PropertyChanged}"/>
-        <Button Content="{Binding MainModel.FirstButton.Content, UpdateSourceTrigger=PropertyChanged}" Visibility="{Binding MainModel.FirstButton.Visibility}" VerticalAlignment="Top" Margin="10,209,10,0" Height="20"/>
-        <Button Content="{Binding MainModel.SecondButton.Content, UpdateSourceTrigger=PropertyChanged}" Visibility="{Binding MainModel.SecondButton.Visibility}" VerticalAlignment="Top" Margin="10,234,10,0" Height="20"/>
-        <Button Content="{Binding MainModel.ThirdButton.Content, UpdateSourceTrigger=PropertyChanged}" Visibility="{Binding MainModel.ThirdButton.Visibility}" VerticalAlignment="Top" Margin="10,259,10,0" Height="20"/>
+        <Button Content="{Binding MainModel.FirstButton.Content, UpdateSourceTrigger=PropertyChanged}" Visibility="{Binding MainModel.FirstButton.Visibility}" Command="{Binding FirstButtonCommand}" VerticalAlignment="Top" Margin="10,209,10,0" Height="20"/>
+        <Button Content="{Binding MainModel.SecondButton.Content, UpdateSourceTrigger=PropertyChanged}" Visibility="{Binding MainModel.SecondButton.Visibility}" Command="{Binding SecondButtonCommand}" VerticalAlignment="Top" Margin="10,234,10,0" Height="20"/>
+        <Button Content="{Binding MainModel.ThirdButton.Content, UpdateSourceTrigger=PropertyChanged}" Visibility="{Binding MainModel.ThirdButton.Visibility}" Command="{Binding ThirdButtonCommand}" VerticalAlignment="Top" Margin="10,259,10,0" Height="20"/>
+        <ContentControl Grid.Column="1" Content="{Binding CurrentChildViewModel}"/>
     </Grid>
 </Window>

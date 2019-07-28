@@ -107,7 +107,11 @@
     <Compile Include="Controls\CalendarModel.cs" />
     <Compile Include="Controls\IButtonModel.cs" />
     <Compile Include="Controls\ICalendarModel.cs" />
+    <Compile Include="DelegateCommand.cs" />
     <Compile Include="EditTask\EditTaskModel.cs" />
+    <Compile Include="EditTask\EditTaskView.xaml.cs">
+      <DependentUpon>EditTaskView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EditTask\EditTaskViewModel.cs" />
     <Compile Include="EditTask\IEditTaskModel.cs" />
     <Compile Include="EditTask\IEditTaskViewModel.cs" />
@@ -123,6 +127,9 @@
     <Compile Include="ViewTasks\IViewTasksModel.cs" />
     <Compile Include="ViewTasks\IViewTasksViewModel.cs" />
     <Compile Include="ViewTasks\ViewTasksModel.cs" />
+    <Compile Include="ViewTasks\ViewTasksView.xaml.cs">
+      <DependentUpon>ViewTasksView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewTasks\ViewTasksViewModel.cs" />
     <Page Include="EditTask\EditTaskView.xaml">
       <SubType>Designer</SubType>
