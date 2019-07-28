@@ -103,8 +103,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Installers.cs" />
+    <Compile Include="IShell.cs" />
+    <Compile Include="Main\IMainModel.cs" />
+    <Compile Include="Main\IMainViewModel.cs" />
+    <Compile Include="Main\MainModel.cs" />
+    <Compile Include="Main\MainViewModel.cs" />
+    <Compile Include="Shell.cs" />
     <Compile Include="TaskEntity.cs" />
-    <Page Include="MainView.xaml">
+    <Page Include="Main\MainView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -113,7 +120,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DatabaseContext.cs" />
-    <Compile Include="MainView.xaml.cs">
+    <Compile Include="Main\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
