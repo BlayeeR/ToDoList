@@ -107,6 +107,11 @@
     <Compile Include="Controls\CalendarModel.cs" />
     <Compile Include="Controls\IButtonModel.cs" />
     <Compile Include="Controls\ICalendarModel.cs" />
+    <Compile Include="EditTask\EditTaskModel.cs" />
+    <Compile Include="EditTask\EditTaskViewModel.cs" />
+    <Compile Include="EditTask\IEditTaskModel.cs" />
+    <Compile Include="EditTask\IEditTaskViewModel.cs" />
+    <Compile Include="EditTask\IViewModel.cs" />
     <Compile Include="Installers.cs" />
     <Compile Include="IShell.cs" />
     <Compile Include="Main\IMainModel.cs" />
@@ -115,6 +120,14 @@
     <Compile Include="Main\MainViewModel.cs" />
     <Compile Include="Shell.cs" />
     <Compile Include="TaskEntity.cs" />
+    <Compile Include="ViewTasks\IViewTasksModel.cs" />
+    <Compile Include="ViewTasks\IViewTasksViewModel.cs" />
+    <Compile Include="ViewTasks\ViewTasksModel.cs" />
+    <Compile Include="ViewTasks\ViewTasksViewModel.cs" />
+    <Page Include="EditTask\EditTaskView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Main\MainView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -128,6 +141,10 @@
       <DependentUpon>MainView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ViewTasks\ViewTasksView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -156,6 +173,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
