@@ -103,6 +103,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\ButtonModel.cs" />
+    <Compile Include="Controls\CalendarModel.cs" />
+    <Compile Include="Controls\IButtonModel.cs" />
+    <Compile Include="Controls\ICalendarModel.cs" />
     <Compile Include="Installers.cs" />
     <Compile Include="IShell.cs" />
     <Compile Include="Main\IMainModel.cs" />

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ToDoApp.Controls;
 using ToDoApp.Main;
 
 namespace ToDoApp
@@ -15,6 +16,8 @@ namespace ToDoApp
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             container
+                .Register(Component.For<ICalendarModel>().ImplementedBy<CalendarModel>().LifestyleTransient())
+                .Register(Component.For<IButtonModel>().ImplementedBy<ButtonModel>().LifestyleTransient())
                 .Register(Component.For<IMainModel>().ImplementedBy<MainModel>().LifestyleTransient())
                 .Register(Component.For<IMainViewModel>().ImplementedBy<MainViewModel>().LifestyleTransient())
                 .Register(Component.For<IShell>().ImplementedBy<Shell>().LifestyleTransient())

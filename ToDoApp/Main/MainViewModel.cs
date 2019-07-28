@@ -16,6 +16,9 @@ namespace ToDoApp.Main
 
         public IMainViewModel Get()
         {
+            MainModel.FirstButton.Content = "Dodaj zadanie";
+            MainModel.SecondButton.Content = "Modyfikuj zadanie";
+            MainModel.ThirdButton.Content = "Usuń zadanie";
             return this;
         }
     }
