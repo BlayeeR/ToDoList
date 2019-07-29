@@ -9,9 +9,15 @@ namespace ToDoApp.ViewTasks
 {
     public class ViewTasksViewModel : IViewTasksViewModel
     {
+        public IViewTasksModel ViewTasksModel { get; set; }
+
         public IViewModel Get()
         {
             return this;
+        }
+        public ViewTasksViewModel(IViewTasksModel viewTasksModel)
+        {
+            this.ViewTasksModel = viewTasksModel;
         }
     }
 }

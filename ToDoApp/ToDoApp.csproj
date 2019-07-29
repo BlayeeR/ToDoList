@@ -107,6 +107,10 @@
     <Compile Include="Controls\CalendarModel.cs" />
     <Compile Include="Controls\IButtonModel.cs" />
     <Compile Include="Controls\ICalendarModel.cs" />
+    <Compile Include="Controls\IListViewModel.cs" />
+    <Compile Include="Controls\ITextBoxModel.cs" />
+    <Compile Include="Controls\ListViewModel.cs" />
+    <Compile Include="Controls\TextBoxModel.cs" />
     <Compile Include="DelegateCommand.cs" />
     <Compile Include="EditTask\EditTaskModel.cs" />
     <Compile Include="EditTask\EditTaskView.xaml.cs">

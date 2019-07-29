@@ -8,5 +8,6 @@ namespace ToDoApp.EditTask
 {
     public interface IEditTaskViewModel : IViewModel
     {
+        IEditTaskModel EditTaskModel { get; set; }
     }
 }

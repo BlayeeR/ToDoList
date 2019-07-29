@@ -19,6 +19,8 @@ namespace ToDoApp
         {
             container
                 .Register(Component.For<ICalendarModel>().ImplementedBy<CalendarModel>().LifestyleTransient())
+                .Register(Component.For<ITextBoxModel>().ImplementedBy<TextBoxModel>().LifestyleTransient())
+                .Register(Component.For<IListViewModel>().ImplementedBy<ListViewModel>().LifestyleTransient())
                 .Register(Component.For<IButtonModel>().ImplementedBy<ButtonModel>().LifestyleTransient())
                 .Register(Component.For<IEditTaskModel>().ImplementedBy<EditTaskModel>().LifestyleTransient())
                 .Register(Component.For<IViewTasksModel>().ImplementedBy<ViewTasksModel>().LifestyleTransient())

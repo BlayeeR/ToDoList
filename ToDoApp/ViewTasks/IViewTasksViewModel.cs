@@ -9,5 +9,6 @@ namespace ToDoApp.ViewTasks
 {
     public interface IViewTasksViewModel : IViewModel
     {
+        IViewTasksModel ViewTasksModel { get; set; }
     }
 }

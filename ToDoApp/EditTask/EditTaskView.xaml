@@ -8,9 +8,9 @@
              d:DesignWidth="600"
              mc:Ignorable="d">
     <Grid>
-        <Label Content="Wybrana data:" HorizontalContentAlignment="Center" Margin="250,15,250,0" Height="26" VerticalAlignment="Top"/>
-        <TextBox IsEnabled="False" Text="Data" VerticalAlignment="Top" Margin="250,41,250,0" TextAlignment="Center"/>
-        <Label Content="Opis:" VerticalAlignment="Top" HorizontalContentAlignment="Center" Margin="250,62,250,0"/>
-        <TextBox TextWrapping="Wrap" Margin="10,88,10,10"/>
+        <Label Content="Nazwa zadania:" HorizontalContentAlignment="Left" Margin="10,8,0,0" Height="26" VerticalAlignment="Top" HorizontalAlignment="Left" Width="130"/>
+        <TextBox Text="{Binding EditTaskModel.DateTextBox.Text, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Margin="10,39,10,0" TextAlignment="Left" Height="26"/>
+        <Label Content="Opis:" VerticalAlignment="Top" HorizontalContentAlignment="Left" Margin="10,70,0,0" HorizontalAlignment="Left" Width="100"/>
+        <TextBox TextWrapping="Wrap" Text="{Binding EditTaskModel.DescriptionTextBox.Text, UpdateSourceTrigger=PropertyChanged}" Margin="10,101,10,13"/>
     </Grid>
 </UserControl>

@@ -8,7 +8,7 @@
              d:DesignWidth="600"
              mc:Ignorable="d">
     <Grid>
-        <ListView Name="TaskListBox" Margin="10,13" Grid.Column="1" SelectionMode="Single" HorizontalContentAlignment="Stretch">
+        <ListView Name="TaskListBox" Margin="10,13" Grid.Column="1" SelectionMode="Single" ItemsSource="{Binding ViewTasksModel.ListView.ListViewItems, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding ViewTasksModel.ListView.SelectedTask}" HorizontalContentAlignment="Stretch">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -16,8 +16,17 @@
             </ListView.ItemContainerStyle>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Opis" Width="455"/>
-                    <GridViewColumn Width="100" Header="Wykonano"/>
+                    <GridView.Columns>
+                        <GridViewColumn Header="Nazwa" DisplayMemberBinding="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}" Width="100"/>
+                        <GridViewColumn Header="Opis" DisplayMemberBinding="{Binding Path=Description, UpdateSourceTrigger=PropertyChanged}" Width="355"/>
+                        <GridViewColumn Width="100" Header="Wykonano">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding Path=Completed, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView.Columns>
                 </GridView>
             </ListView.View>
         </ListView>

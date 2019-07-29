@@ -47,11 +47,21 @@ namespace ToDoApp.Main
             MainModel.FirstButton.Content = "Utwórz zadanie";
             MainModel.SecondButton.Content = "Modyfikuj zadanie";
             MainModel.ThirdButton.Content = "Usuń zadanie";
+            MainModel.Calendar.SelectedDate = DateTime.Today;
             MainModel.Calendar.PropertyChanged += Calendar_PropertyChanged;
+            viewTasksViewModel.ViewTasksModel.ListView.PropertyChanged += ListView_PropertyChanged;
             FirstButtonCommand = new DelegateCommand(OnFirstButtonClicked, CanExecuteFirstButtonCommand);
             SecondButtonCommand = new DelegateCommand(OnSecondButtonClicked, CanExecuteSecondButtonCommand);
             ThirdButtonCommand = new DelegateCommand(OnThirdButtonClicked, CanExecuteThirdButtonCommand);
             return this;
+        }
+
+        private void ListView_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName.Equals("SelectedTask"))
+            {
+                (ThirdButtonCommand as DelegateCommand).InvokeCanExecuteChanged();
+            }
         }
 
         private void Calendar_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -102,7 +112,8 @@ namespace ToDoApp.Main
                 {
                     if (this.MainModel.Calendar.SelectedDate == DateTime.MinValue)
                         return false;
-                    //TODO: check if current child is viewtasks and if listview has selected item
+                    if (((ViewTasksViewModel)CurrentChildViewModel).ViewTasksModel.ListView.SelectedTask == null)
+                        return false;
                     return true;
                 }
                 else if (CurrentChildViewModel == editTaskViewModel)
@@ -124,6 +135,9 @@ namespace ToDoApp.Main
             }
             else
             {
+                MainModel.FirstButton.Content = "Utwórz zadanie";
+                MainModel.SecondButton.Content = "Modyfikuj zadanie";
+                MainModel.ThirdButton.Visibility = Visibility.Visible;
                 //TODO: Add/edit task in database
                 CurrentChildViewModel = viewTasksViewModel;
             }
@@ -152,7 +166,6 @@ namespace ToDoApp.Main
         {
             if (CurrentChildViewModel is ViewTasksViewModel)
             {
-                //delete from database
             }
         }
 

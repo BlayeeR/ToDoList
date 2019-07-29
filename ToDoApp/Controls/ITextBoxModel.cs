@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ToDoApp.Controls;
 
-namespace ToDoApp.ViewTasks
+namespace ToDoApp.Controls
 {
-    public interface IViewTasksModel
+    public interface ITextBoxModel
     {
-        IListViewModel ListView { get; set; }
+        string Text { get; set; }
     }
 }
