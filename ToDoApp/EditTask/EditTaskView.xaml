@@ -8,9 +8,14 @@
              d:DesignWidth="600"
              mc:Ignorable="d">
     <Grid>
-        <Label Content="Nazwa zadania:" HorizontalContentAlignment="Left" Margin="10,8,0,0" Height="26" VerticalAlignment="Top" HorizontalAlignment="Left" Width="130"/>
-        <TextBox Text="{Binding EditTaskModel.EditedTask.Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Top" Margin="10,39,10,0" TextAlignment="Left" Height="26"/>
-        <Label Content="Opis:" VerticalAlignment="Top" HorizontalContentAlignment="Left" Margin="10,70,0,0" HorizontalAlignment="Left" Width="100"/>
-        <TextBox TextWrapping="Wrap" Text="{Binding EditTaskModel.EditedTask.Description, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="10,101,10,13"/>
+        <Label Content="Nazwa zadania:" HorizontalContentAlignment="Left" Margin="10,8,0,0" Height="26" VerticalAlignment="Top" HorizontalAlignment="Left" Width="92"/>
+        <TextBox Text="{Binding EditTaskModel.EditedTask.Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Top" Margin="102,12,10,0" TextAlignment="Left" Height="22"/>
+        <Label Content="Opis:" VerticalAlignment="Top" HorizontalContentAlignment="Left" Margin="10,70,0,0" HorizontalAlignment="Left" Width="92"/>
+        <TextBox TextWrapping="Wrap" Text="{Binding EditTaskModel.EditedTask.Description, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="102,70,10,13"/>
+        <Label Content="Wykonano:" HorizontalContentAlignment="Left" Margin="10,39,0,0" HorizontalAlignment="Left" Width="92" Height="26" VerticalAlignment="Top" RenderTransformOrigin="1.181,-1.514"/>
+        <ComboBox HorizontalAlignment="Left" Width="60" Margin="102,41,0,0" Height="22" VerticalAlignment="Top" SelectedIndex="{Binding EditTaskModel.EditedTask.Completed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            <ComboBoxItem Content="Nie"/>
+            <ComboBoxItem Content="Tak"/>
+        </ComboBox>
     </Grid>
 </UserControl>

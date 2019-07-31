@@ -103,6 +103,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\BoolToIndexConverter.cs" />
     <Compile Include="Helpers\CalendarHelper.cs" />
     <Compile Include="Controls\ButtonModel.cs" />
     <Compile Include="Controls\CalendarModel.cs" />
