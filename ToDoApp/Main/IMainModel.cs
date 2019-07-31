@@ -7,7 +7,7 @@ using ToDoApp.Controls;
 
 namespace ToDoApp.Main
 {
-    public interface IMainModel
+    public interface IMainModel : IModel
     {
         IButtonModel FirstButton { get; set; }
         IButtonModel SecondButton { get; set; }

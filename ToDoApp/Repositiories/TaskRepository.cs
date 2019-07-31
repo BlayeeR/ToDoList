@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ToDoApp.Services
+namespace ToDoApp.Repositiories
 {
-    public class TaskService : ITaskService
+    public class TaskRepository : ITaskRepository
     {
         public ICollection<TaskEntity> GetTasks()
         {
@@ -26,7 +26,7 @@ namespace ToDoApp.Services
             }
         }
 
-        public void InsertTask(TaskEntity task)
+        public void AddOrUpdateTask(TaskEntity task)
         {
             using (DatabaseContext context = new DatabaseContext())
             {

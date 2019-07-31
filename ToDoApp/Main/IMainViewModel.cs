@@ -8,10 +8,9 @@ using ToDoApp.ViewTasks;
 
 namespace ToDoApp.Main
 {
-    public interface IMainViewModel
+    public interface IMainViewModel : IViewModel
     {
         IMainModel MainModel { get; set; }
         IViewModel CurrentChildViewModel { get; set; }
-        IMainViewModel Get();
     }
 }

@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ToDoApp.Services
+namespace ToDoApp.Repositiories
 {
-    public interface ITaskService
+    public interface ITaskRepository : IRepository
     {
         ICollection<TaskEntity> GetTasks();
         ICollection<TaskEntity> GetTasks(DateTime date);
 
-        void InsertTask(TaskEntity task);
+        void AddOrUpdateTask(TaskEntity task);
         void RemoveTask(TaskEntity task);
     }
 }

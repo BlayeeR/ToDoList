@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ToDoApp.EditTask
+namespace ToDoApp.Repositiories
 {
-    public interface IViewModel
+    public interface IRepository
     {
-        IViewModel Get();
     }
 }

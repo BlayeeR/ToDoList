@@ -9,7 +9,7 @@ using System.Windows;
 using System.Windows.Input;
 using ToDoApp.Controls;
 using ToDoApp.EditTask;
-using ToDoApp.Services;
+using ToDoApp.Repositiories;
 using ToDoApp.ViewTasks;
 
 namespace ToDoApp.Main
@@ -31,7 +31,7 @@ namespace ToDoApp.Main
         private readonly IViewTasksViewModel viewTasksViewModel;
         private IViewModel currentChildViewModel;
 
-        private readonly ITaskService TaskService;
+        private readonly ITaskRepository TaskService;
 
         public ICommand FirstButtonCommand { get; private set; }
         public ICommand SecondButtonCommand { get; private set; }
@@ -39,7 +39,7 @@ namespace ToDoApp.Main
         public event PropertyChangedEventHandler PropertyChanged;
 
 
-        public MainViewModel(IMainModel mainModel, IEditTaskViewModel editTaskViewModel, IViewTasksViewModel viewTasksViewModel, ITaskService taskService)
+        public MainViewModel(IMainModel mainModel, IEditTaskViewModel editTaskViewModel, IViewTasksViewModel viewTasksViewModel, ITaskRepository taskService)
         {
             this.MainModel = mainModel;
             this.editTaskViewModel = editTaskViewModel;
@@ -47,7 +47,7 @@ namespace ToDoApp.Main
             this.TaskService = taskService;
         }
 
-        public IMainViewModel Get()
+        public IViewModel Get()
         {
             CurrentChildViewModel = viewTasksViewModel;
             MainModel.FirstButton.Content = "Utwórz zadanie";
@@ -181,7 +181,7 @@ namespace ToDoApp.Main
                 MainModel.SecondButton.Content = "Modyfikuj zadanie";
                 MainModel.ThirdButton.Visibility = Visibility.Visible;
                 editTaskViewModel.EditTaskModel.EditedTask.Date = MainModel.Calendar.SelectedDate;
-                TaskService.InsertTask(editTaskViewModel.EditTaskModel.EditedTask);
+                TaskService.AddOrUpdateTask(editTaskViewModel.EditTaskModel.EditedTask);
                 editTaskViewModel.EditTaskModel.EditedTask = new TaskEntity();
                 viewTasksViewModel.ViewTasksModel.ListView.ListViewItems = new ObservableCollection<TaskEntity>(TaskService.GetTasks(MainModel.Calendar.SelectedDate));
                 CurrentChildViewModel = viewTasksViewModel;

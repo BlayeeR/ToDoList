@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using ToDoApp.Controls;
 using ToDoApp.EditTask;
 using ToDoApp.Main;
-using ToDoApp.Services;
+using ToDoApp.Repositiories;
 using ToDoApp.ViewTasks;
 
 namespace ToDoApp
@@ -24,7 +24,7 @@ namespace ToDoApp
                 .Register(Component.For<IListViewModel>().ImplementedBy<ListViewModel>().LifestyleTransient())
                 .Register(Component.For<IButtonModel>().ImplementedBy<ButtonModel>().LifestyleTransient())
                 .Register(Component.For<IEditTaskModel>().ImplementedBy<EditTaskModel>().LifestyleTransient())
-                .Register(Component.For<ITaskService>().ImplementedBy<TaskService>().LifestyleTransient())
+                .Register(Component.For<ITaskRepository>().ImplementedBy<TaskRepository>().LifestyleTransient())
                 .Register(Component.For<IViewTasksModel>().ImplementedBy<ViewTasksModel>().LifestyleTransient())
                 .Register(Component.For<IEditTaskViewModel>().ImplementedBy<EditTaskViewModel>().LifestyleTransient())
                 .Register(Component.For<IViewTasksViewModel>().ImplementedBy<ViewTasksViewModel>().LifestyleTransient())
