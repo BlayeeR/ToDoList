@@ -11,8 +11,17 @@ namespace ToDoApp.Controls
     public class ListViewModel : IListViewModel
     {
         private TaskEntity selectedTask;
+        private ObservableCollection<TaskEntity> listViewItems;
 
-        public ObservableCollection<TaskEntity> ListViewItems { get; set; }
+        public ObservableCollection<TaskEntity> ListViewItems
+        {
+            get => listViewItems;
+            set
+            {
+                listViewItems = value;
+                OnPropertyChanged(new PropertyChangedEventArgs("ListViewItems"));
+            }
+        }
 
         public ListViewModel()
         {

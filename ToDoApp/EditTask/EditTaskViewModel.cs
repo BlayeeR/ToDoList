@@ -15,11 +15,6 @@ namespace ToDoApp.EditTask
             this.EditTaskModel = editTaskModel;
         }
 
-        public void OnSelectedDateChanged(DateTime date)
-        {
-            EditTaskModel.DateTextBox.Text = date.ToShortDateString();
-        }
-
         public IViewModel Get()
         {
             return this;

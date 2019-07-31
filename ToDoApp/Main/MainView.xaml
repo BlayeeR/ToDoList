@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ToDoApp.Main"
+        xmlns:helpers="clr-namespace:ToDoApp.Helpers"
         mc:Ignorable="d"
         Title="Zadania" Height="331" Width="800" MinHeight="331" MinWidth="600">
     <Grid>
@@ -12,7 +13,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Label Content="Wybierz datę" VerticalAlignment="Top" Margin="60,8,60,0" Height="26"/>
-        <Calendar VerticalAlignment="Top" Margin="10,36,10,0" Height="168" SelectedDate="{Binding MainModel.Calendar.SelectedDate, UpdateSourceTrigger=PropertyChanged}"/>
+        <Calendar VerticalAlignment="Top" Margin="10,36,10,0" Height="168" SelectedDate="{Binding MainModel.Calendar.SelectedDate, UpdateSourceTrigger=PropertyChanged}" helpers:CalandarHelper.SingleClickDefocus="True"/>
         <Button Content="{Binding MainModel.FirstButton.Content, UpdateSourceTrigger=PropertyChanged}" Visibility="{Binding MainModel.FirstButton.Visibility}" Command="{Binding FirstButtonCommand}" VerticalAlignment="Top" Margin="10,209,10,0" Height="20"/>
         <Button Content="{Binding MainModel.SecondButton.Content, UpdateSourceTrigger=PropertyChanged}" Visibility="{Binding MainModel.SecondButton.Visibility}" Command="{Binding SecondButtonCommand}" VerticalAlignment="Top" Margin="10,234,10,0" Height="20"/>
         <Button Content="{Binding MainModel.ThirdButton.Content, UpdateSourceTrigger=PropertyChanged}" Visibility="{Binding MainModel.ThirdButton.Visibility}" Command="{Binding ThirdButtonCommand}" VerticalAlignment="Top" Margin="10,259,10,0" Height="20"/>

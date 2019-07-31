@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,7 @@ using System.Windows;
 using System.Windows.Input;
 using ToDoApp.Controls;
 using ToDoApp.EditTask;
+using ToDoApp.Services;
 using ToDoApp.ViewTasks;
 
 namespace ToDoApp.Main
@@ -22,11 +24,14 @@ namespace ToDoApp.Main
             {
                 currentChildViewModel = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("CurrentChildViewModel"));
+                InvokeButtonsCanExecuteChanged();
             }
         }
         private readonly IEditTaskViewModel editTaskViewModel;
         private readonly IViewTasksViewModel viewTasksViewModel;
         private IViewModel currentChildViewModel;
+
+        private readonly ITaskService TaskService;
 
         public ICommand FirstButtonCommand { get; private set; }
         public ICommand SecondButtonCommand { get; private set; }
@@ -34,11 +39,12 @@ namespace ToDoApp.Main
         public event PropertyChangedEventHandler PropertyChanged;
 
 
-        public MainViewModel(IMainModel mainModel, IEditTaskViewModel editTaskViewModel, IViewTasksViewModel viewTasksViewModel)
+        public MainViewModel(IMainModel mainModel, IEditTaskViewModel editTaskViewModel, IViewTasksViewModel viewTasksViewModel, ITaskService taskService)
         {
             this.MainModel = mainModel;
             this.editTaskViewModel = editTaskViewModel;
             this.viewTasksViewModel = viewTasksViewModel;
+            this.TaskService = taskService;
         }
 
         public IMainViewModel Get()
@@ -48,19 +54,40 @@ namespace ToDoApp.Main
             MainModel.SecondButton.Content = "Modyfikuj zadanie";
             MainModel.ThirdButton.Content = "Usuń zadanie";
             MainModel.Calendar.SelectedDate = DateTime.Today;
+            viewTasksViewModel.ViewTasksModel.ListView.ListViewItems = new ObservableCollection<TaskEntity>(TaskService.GetTasks(MainModel.Calendar.SelectedDate));
+
+            editTaskViewModel.EditTaskModel.EditedTask = new TaskEntity();
+            editTaskViewModel.EditTaskModel.PropertyChanged += EditTaskModel_PropertyChanged;
             MainModel.Calendar.PropertyChanged += Calendar_PropertyChanged;
             viewTasksViewModel.ViewTasksModel.ListView.PropertyChanged += ListView_PropertyChanged;
+
             FirstButtonCommand = new DelegateCommand(OnFirstButtonClicked, CanExecuteFirstButtonCommand);
             SecondButtonCommand = new DelegateCommand(OnSecondButtonClicked, CanExecuteSecondButtonCommand);
             ThirdButtonCommand = new DelegateCommand(OnThirdButtonClicked, CanExecuteThirdButtonCommand);
             return this;
         }
 
+        private void EditTaskModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName.Equals("EditedTask"))
+            {
+                editTaskViewModel.EditTaskModel.EditedTask.PropertyChanged += EditedTask_PropertyChanged;
+            }
+        }
+
+        private void EditedTask_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if(e.PropertyName.Equals("Name") || e.PropertyName.Equals("Description"))
+            {
+                InvokeButtonsCanExecuteChanged();
+            }
+        }
+
         private void ListView_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName.Equals("SelectedTask"))
             {
-                (ThirdButtonCommand as DelegateCommand).InvokeCanExecuteChanged();
+                InvokeButtonsCanExecuteChanged();
             }
         }
 
@@ -68,8 +95,8 @@ namespace ToDoApp.Main
         {
             if (e.PropertyName.Equals("SelectedDate"))
             {
-                (SecondButtonCommand as DelegateCommand).InvokeCanExecuteChanged();
-                (ThirdButtonCommand as DelegateCommand).InvokeCanExecuteChanged();
+                viewTasksViewModel.ViewTasksModel.ListView.ListViewItems = new ObservableCollection<TaskEntity>(TaskService.GetTasks(MainModel.Calendar.SelectedDate));
+                InvokeButtonsCanExecuteChanged();
             }
         }
 
@@ -81,7 +108,8 @@ namespace ToDoApp.Main
                     return true;
                 else if (CurrentChildViewModel == editTaskViewModel)
                 {
-                    //TODO: Check if textboxes arent empty
+                    if (String.IsNullOrEmpty(editTaskViewModel.EditTaskModel.EditedTask.Description) || String.IsNullOrEmpty(editTaskViewModel.EditTaskModel.EditedTask.Name))
+                        return false;
                     return true;
                 }
             }
@@ -95,6 +123,8 @@ namespace ToDoApp.Main
                 if (CurrentChildViewModel == viewTasksViewModel)
                 {
                     if (this.MainModel.Calendar.SelectedDate == DateTime.MinValue)
+                        return false;
+                    if (viewTasksViewModel.ViewTasksModel.ListView.SelectedTask == null)
                         return false;
                     return true;
                 }
@@ -122,6 +152,17 @@ namespace ToDoApp.Main
             return false;
         }
 
+        private void InvokeButtonsCanExecuteChanged()
+        {
+            try
+            {
+                (FirstButtonCommand as DelegateCommand).InvokeCanExecuteChanged();
+                (SecondButtonCommand as DelegateCommand).InvokeCanExecuteChanged();
+                (ThirdButtonCommand as DelegateCommand).InvokeCanExecuteChanged();
+            }
+            catch { }
+        }
+
         private void OnFirstButtonClicked(object commandParameter)
         {
             if (CurrentChildViewModel is ViewTasksViewModel)
@@ -131,6 +172,7 @@ namespace ToDoApp.Main
                 MainModel.FirstButton.Content = "Dodaj zadanie";
                 MainModel.SecondButton.Content = "Anuluj";
                 MainModel.ThirdButton.Visibility = Visibility.Collapsed;
+                editTaskViewModel.EditTaskModel.EditedTask = new TaskEntity();
                 CurrentChildViewModel = editTaskViewModel;
             }
             else
@@ -138,7 +180,10 @@ namespace ToDoApp.Main
                 MainModel.FirstButton.Content = "Utwórz zadanie";
                 MainModel.SecondButton.Content = "Modyfikuj zadanie";
                 MainModel.ThirdButton.Visibility = Visibility.Visible;
-                //TODO: Add/edit task in database
+                editTaskViewModel.EditTaskModel.EditedTask.Date = MainModel.Calendar.SelectedDate;
+                TaskService.InsertTask(editTaskViewModel.EditTaskModel.EditedTask);
+                editTaskViewModel.EditTaskModel.EditedTask = new TaskEntity();
+                viewTasksViewModel.ViewTasksModel.ListView.ListViewItems = new ObservableCollection<TaskEntity>(TaskService.GetTasks(MainModel.Calendar.SelectedDate));
                 CurrentChildViewModel = viewTasksViewModel;
             }
 
@@ -151,6 +196,7 @@ namespace ToDoApp.Main
                 MainModel.FirstButton.Content = "Zapisz zmiany";
                 MainModel.SecondButton.Content = "Anuluj";
                 MainModel.ThirdButton.Visibility = Visibility.Collapsed;
+                editTaskViewModel.EditTaskModel.EditedTask = viewTasksViewModel.ViewTasksModel.ListView.SelectedTask;
                 CurrentChildViewModel = editTaskViewModel;
             }
             else
@@ -166,6 +212,12 @@ namespace ToDoApp.Main
         {
             if (CurrentChildViewModel is ViewTasksViewModel)
             {
+                if(viewTasksViewModel.ViewTasksModel.ListView.SelectedTask != null)
+                {
+                    TaskService.RemoveTask(viewTasksViewModel.ViewTasksModel.ListView.SelectedTask);
+                    viewTasksViewModel.ViewTasksModel.ListView.ListViewItems.Remove(viewTasksViewModel.ViewTasksModel.ListView.SelectedTask);
+                    viewTasksViewModel.ViewTasksModel.ListView.SelectedTask = null;
+                }
             }
         }
 

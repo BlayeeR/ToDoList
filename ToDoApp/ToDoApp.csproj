@@ -103,6 +103,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Helpers\CalendarHelper.cs" />
     <Compile Include="Controls\ButtonModel.cs" />
     <Compile Include="Controls\CalendarModel.cs" />
     <Compile Include="Controls\IButtonModel.cs" />
@@ -111,6 +112,7 @@
     <Compile Include="Controls\ITextBoxModel.cs" />
     <Compile Include="Controls\ListViewModel.cs" />
     <Compile Include="Controls\TextBoxModel.cs" />
+    <Compile Include="Converters\BooleanToCompletedStringConverter.cs" />
     <Compile Include="DelegateCommand.cs" />
     <Compile Include="EditTask\EditTaskModel.cs" />
     <Compile Include="EditTask\EditTaskView.xaml.cs">
@@ -122,10 +124,12 @@
     <Compile Include="EditTask\IViewModel.cs" />
     <Compile Include="Installers.cs" />
     <Compile Include="IShell.cs" />
+    <Compile Include="Services\ITaskService.cs" />
     <Compile Include="Main\IMainModel.cs" />
     <Compile Include="Main\IMainViewModel.cs" />
     <Compile Include="Main\MainModel.cs" />
     <Compile Include="Main\MainViewModel.cs" />
+    <Compile Include="Services\TaskService.cs" />
     <Compile Include="Shell.cs" />
     <Compile Include="TaskEntity.cs" />
     <Compile Include="ViewTasks\IViewTasksModel.cs" />
